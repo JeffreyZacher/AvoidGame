@@ -6,20 +6,18 @@ public class LevelEditor : MonoBehaviour
 	public GameObject floor;
 	public GameObject levelParent;
 
-	//IMPORTANT: Make sure that the level Prefabe is SQUARE & ODD NUMBERS!!!!!!!!!!!!
+	//IMPORTANT: Make sure that the level Prefab is SQUARE & ODD NUMBERS!!!!!!!!!!!!
 	private int FloorWidth { get {return (int)floor.transform.localScale.x; } }
-	private int levelNumber { get { return levelParent.transform.childCount; } }
+	private int LevelNumber { get { return levelParent.transform.childCount; } }
 
 	[SerializeField]
 	public Vector2Int PlatfromCenterTile;
-
-
 
 	public void CreatePlatform(Vector2Int platformCenter)
 	{
 		PlatfromCenterTile = platformCenter;
 
-		var platformcontainer = new GameObject("Level" + PlatfromCenterTile.x + "x" + PlatfromCenterTile.y + "y");
+		var platformcontainer = new GameObject("Level" + PlatfromCenterTile.x + "x" + PlatfromCenterTile.y + "z");
 		platformcontainer.transform.parent = levelParent.transform;
 
 		//Create the floor .75 meters below 0 so that the obstaclys have a transform of 0 in the y-axis)
@@ -54,7 +52,7 @@ public class LevelEditor : MonoBehaviour
 		{
 			for (int j = 0; j < FloorWidth; j++)
 			{
-				obstacles[i, j] = rnd.Next(0, 2) == 1;
+				obstacles[i, j] = rnd.Next(0, 5) == 1;
 			}
 		}
 		return obstacles;
