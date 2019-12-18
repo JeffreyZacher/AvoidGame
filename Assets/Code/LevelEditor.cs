@@ -11,13 +11,13 @@ public class LevelEditor : MonoBehaviour
 	private int LevelNumber { get { return levelParent.transform.childCount; } }
 
 	[SerializeField]
-	public Vector2Int PlatfromCenterTile;
+	public Vector2Int PlatformCoordinates;
 
-	public void CreatePlatform(Vector2Int platformCenter)
+	public GameObject CreatePlatform(Vector2Int platformCenter)
 	{
-		PlatfromCenterTile = platformCenter;
+		PlatformCoordinates = platformCenter;
 
-		var platformcontainer = new GameObject("Level" + PlatfromCenterTile.x + "x" + PlatfromCenterTile.y + "z");
+		var platformcontainer = new GameObject("Level" + PlatformCoordinates.x + "x" + PlatformCoordinates.y + "z");
 		platformcontainer.transform.parent = levelParent.transform;
 
 		//Create the floor .75 meters below 0 so that the obstaclys have a transform of 0 in the y-axis)
@@ -31,11 +31,13 @@ public class LevelEditor : MonoBehaviour
 			{
 				if (array[i, j])
 				{
-					var foo = GetObstaclePosition(i, j, PlatfromCenterTile * FloorWidth);
+					var foo = GetObstaclePosition(i, j, PlatformCoordinates * FloorWidth);
 					Instantiate(obstacle, new Vector3(foo.x, 0f, foo.y), Quaternion.identity, platformcontainer.transform);
 				}
 			}
 		}
+
+		return platformcontainer;
 	}
 
 	public void DestroyPlatform()
