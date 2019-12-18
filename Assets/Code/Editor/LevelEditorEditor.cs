@@ -13,7 +13,7 @@ public class LevelEditorEditor : Editor
 
 		if (GUILayout.Button("Generate level"))
 		{
-			levelEditor.CreatePlatform(levelEditor.PlatfromCenterTile);
+			levelEditor.CreatePlatform(levelEditor.PlatformCoordinates);
 		}
 
 		if (GUILayout.Button("Delete Levels"))
